@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SWIFT Passkey Transfer</title><link rel="stylesheet" href="remainder.css"></head>
+<body><main>
+<header><div><span class="eyebrow" id="network-label">SWIFT · v2.0</span><h1>Passkey transfer</h1></div><span class="badge" id="connection">Not connected</span></header>
+<section class="panel settings"><h2>Network and asset</h2><div class="settings-grid">
+<label>Network<select id="network-select"><option value="137">Polygon PoS</option><option value="56">BNB Smart Chain</option></select></label>
+<label>Asset<select id="asset-kind"><option value="erc20">Token (ERC-20)</option><option value="native">Native currency (POL / BNB)</option></select></label>
+<label id="token-field">Token contract<input id="token-input" spellcheck="false" autocomplete="off"></label>
+<label>Source SWIFT address<input id="source-input" spellcheck="false" autocomplete="off" placeholder="0x…"></label>
+<label>Gas price ceiling<select id="fee-select"></select></label>
+</div><button id="apply-settings">Update balance</button><p class="note">USDT is selected by default. After changing the contract, click Update balance to read its symbol, decimals and balance. Changing any transfer field clears the draft and signature.</p></section>
+<section class="balances" aria-label="Live balances">
+<article class="balance primary"><span id="asset-label">Selected asset in SWIFT</span><strong id="wallet-usdt">—</strong><small id="token-caption">Balance not loaded</small></article>
+<article class="balance"><span id="native-wallet-label">Native currency in SWIFT</span><strong id="wallet-bnb">—</strong><small>EntryPoint gas deposit: <b id="deposit">—</b> <span id="native-deposit-symbol"></span></small></article>
+<article class="balance"><span>Selected asset at recipient</span><strong id="recipient-usdt">—</strong><small>Selected network</small></article>
+<article class="balance"><span id="native-recipient-label">Native currency at recipient</span><strong id="recipient-bnb">—</strong><small>No recipient gas is needed to receive a transfer</small></article>
+</section>
+<div class="refresh"><span id="updated">Balance not loaded</span><button class="text-button" id="refresh">Refresh now</button></div>
+<section class="panel destination"><label>Recipient address<input id="recipient-input" spellcheck="false" autocomplete="off" placeholder="0x…"></label><p id="recipient-address" class="address"></p><p class="note">Check the full address and network. Click Update balance after changing the recipient.</p></section>
+<section class="panel"><div class="step-heading"><span class="step">1</span><div><h2>Prepare and review</h2><p>Enter an amount within the available balance.</p></div></div>
+<div class="amount-entry"><label for="amount-input">Amount</label><div class="amount-row"><input id="amount-input" inputmode="decimal" autocomplete="off" placeholder="e.g. 1.25"><button id="max-amount" class="secondary">Max</button></div><small id="amount-hint">Load a balance first.</small></div>
+<p class="note" id="gas-note"></p><p class="note">Native Max reserves the configured maximum fee after accounting for the gas deposit. Unused gas can remain in the EntryPoint deposit; this page does not withdraw that deposit. Native recipients must be externally owned accounts.</p>
+<label class="consent"><input type="checkbox" id="estimate-consent"><span>I allow the unsigned draft to be sent to Pimlico for gas estimation. Pimlico will see addresses, amount and operation parameters.</span></label><button id="prepare" disabled>Prepare transfer</button>
+<div id="review" hidden class="review"><div><span>Transfer amount</span><strong id="review-amount"></strong></div><div><span>Maximum fee</span><strong id="review-cap"></strong></div><div><span>Simulated cost</span><strong id="review-estimate"></strong></div></div></section>
+<section class="panel"><div class="step-heading"><span class="step">2</span><div><h2>Sign with your passkey</h2><p>The signature is verified locally against the selected SWIFT owner and held in this tab.</p></div></div><label class="consent"><input type="checkbox" id="sign-consent" disabled><span id="sign-consent-text"></span></label><div class="button-row"><button id="sign" disabled>Sign transfer</button><button id="cancel" class="secondary" disabled>Cancel request</button></div><p class="note">This authorizes a real transfer. The signature has no on-chain expiry. Closing this tab cannot revoke copies already disclosed. Enter your PIN only in the standard Chrome dialog.</p></section>
+<section class="panel"><div class="step-heading"><span class="step">3</span><div><h2>Submit and confirm</h2><p>Submission requires a separate action below.</p></div></div><label class="consent"><input type="checkbox" id="send-consent" disabled><span id="send-consent-text"></span></label><button id="send" class="send" disabled>Submit signed transfer</button><button id="check-receipt" class="secondary" hidden>Check submission status</button><div id="receipt" hidden class="receipt"><strong id="receipt-title"></strong><p id="receipt-detail"></p><a id="tx-link" target="_blank" rel="noreferrer noopener">View transaction ↗</a></div></section>
+<section class="status-panel" aria-live="polite"><span id="status">Enter your SWIFT address and load a balance.</span></section>
+<details class="panel"><summary>Data sources and exact parameters</summary><p>Balances refresh every 15 seconds while this tab is visible, after you load the selected settings. <span id="sources"></span></p><p>Asset: <span id="token-address" class="address"></span></p><p>SWIFT: <span id="wallet-address" class="address"></span></p><pre id="technical">No operation prepared.</pre></details>
+<footer>No private key access, telemetry or automatic submission.</footer>
+</main><script type="module" src="remainder.mjs"></script></body></html>

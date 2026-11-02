@@ -1,0 +1,3 @@
+@noble/hashes 1.2.0, copied from the existing local Barz dependencies.
+MIT license. ESM import paths rewritten to local .mjs; sourceMappingURL comments removed.
+Only Keccak-256 hashing is used. No new packages installed.

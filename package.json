@@ -1,0 +1,16 @@
+{
+  "name": "swift-passkey-transfer",
+  "version": "2.0.1",
+  "private": true,
+  "description": "Auditable Chrome MV3 transfer UI for compatible Barz SWIFT wallets",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "package": "python3 scripts/package.py"
+  }
+}

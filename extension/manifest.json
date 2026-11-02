@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "SWIFT Passkey Transfer",
+  "version": "2.0.1",
+  "minimum_chrome_version": "122",
+  "description": "Explicit passkey transfers for compatible Barz SWIFT wallets on Polygon and BSC. ERC-20 tokens and native POL / BNB.",
+  "host_permissions": [
+    "https://trustwallet.com/*",
+    "https://bsc-rpc.publicnode.com/*",
+    "https://public.pimlico.io/*",
+    "https://polygon-bor-rpc.publicnode.com/*"
+  ],
+  "action": {
+    "default_title": "SWIFT Passkey Transfer"
+  },
+  "background": {
+    "service_worker": "open.js"
+  },
+  "options_ui": {
+    "page": "remainder.html",
+    "open_in_tab": true
+  },
+  "content_security_policy": {
+    "extension_pages": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://bsc-rpc.publicnode.com https://public.pimlico.io https://polygon-bor-rpc.publicnode.com; img-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+  }
+}
